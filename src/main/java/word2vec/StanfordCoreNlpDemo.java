@@ -1,23 +1,28 @@
-package utility;
+package word2vec;
 /*
  * This class is provided as a tutorial of Standford CoreNLP
  * It exists here to provide properties of Chinese Standford pipeline, which can't be set manually for unknown reasons.
  */
 
-import java.io.*;
-import java.util.*;
-
-import edu.stanford.nlp.coref.CorefCoreAnnotations;
-
-import edu.stanford.nlp.coref.data.CorefChain;
-import edu.stanford.nlp.io.*;
-import edu.stanford.nlp.ling.*;
-import edu.stanford.nlp.pipeline.*;
+import edu.stanford.nlp.dcoref.CorefChain;
+import edu.stanford.nlp.dcoref.CorefCoreAnnotations;
+import edu.stanford.nlp.io.IOUtils;
+import edu.stanford.nlp.ling.CoreAnnotations;
+import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.pipeline.Annotation;
+import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.semgraph.SemanticGraph;
 import edu.stanford.nlp.semgraph.SemanticGraphCoreAnnotations;
 import edu.stanford.nlp.sentiment.SentimentCoreAnnotations;
-import edu.stanford.nlp.trees.*;
-import edu.stanford.nlp.util.*;
+import edu.stanford.nlp.trees.Tree;
+import edu.stanford.nlp.trees.TreeCoreAnnotations;
+import edu.stanford.nlp.util.CoreMap;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 /** This class demonstrates building and using a Stanford CoreNLP pipeline. */
 public class StanfordCoreNlpDemo {

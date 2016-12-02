@@ -1,20 +1,21 @@
-package utility;
+package word2vec;
 /*This package contains functions of Standford CoreNLP project, including:
  * PoS tagger for dictionary sentiment analysis: getPoS
  * uni-gramn for ML based senti analysis
  */
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Properties;
-
 import edu.stanford.nlp.ling.CoreAnnotations;
-import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.ling.CoreAnnotations.PartOfSpeechAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TextAnnotation;
+import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
+
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Properties;
 
 public class STFNLP {
 	private Properties props;
@@ -22,7 +23,7 @@ public class STFNLP {
 	private List<CoreLabel> tokens;	
 	
 	// specify parameters and build the pipeline
-	public STFNLP(){
+	public STFNLP() throws IOException {
 		props = new Properties(); 
 		
 		/*
@@ -32,14 +33,29 @@ public class STFNLP {
 		 */
 		
 		try {
-			props.load(StanfordCoreNLP.class.getResourceAsStream("StanfordCoreNLP-chinese.properties"));
+            props.load(StanfordCoreNLP.class.getResourceAsStream("/StanfordCoreNLP-chinese.properties"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		props.put("annotators", "segment, ssplit, pos");
 		//alter default parameters
+		/*
 		props.put("annotators", "tokenize, ssplit, pos");
+		props.put("segment.model","edu/stanford/nlp/models/segmenter/chinese/ctb.gz");
+		props.put("segment.sighanCorporaDict","edu/stanford/nlp/models/segmenter/chinese");
+		props.put("segment.serDictionary","edu/stanford/nlp/models/segmenter/chinese/dict-chris6.ser.gz");
+		props.put("segment.sighanPostProcessing","true");
+		props.put("ssplit.boundaryTokenRegex","[.]|[!?]+|[。]|[！？]+");
+		props.put("pos.model","edu/stanford/nlp/models/pos-tagger/chinese-distsim/chinese-distsim.tagger");
+		props.put("ner.model","edu/stanford/nlp/models/ner/chinese.misc.distsim.crf.ser.gz");
+		props.put("ner.applyNumericClassifiers","false");
+		props.put("ner.useSUTime","false");
+		props.put("parse.model","edu/stanford/nlp/models/lexparser/chinesePCFG.ser.gz");
+		*/
+
+
+		//pipeline = new StanfordCoreNLP("StanfordCoreNLP-chinese.properties");
 		pipeline = new StanfordCoreNLP(props);
 	}
 	

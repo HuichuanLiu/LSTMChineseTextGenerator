@@ -4,9 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Import libraries of DL4J from maven center repositories -->
     <groupId>cn.lingju</groupId>
-    <artifactId>LSTM Chinese Text Generator</artifactId>
+    <artifactId>LSTMChineseTextGenerator</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <parent>
@@ -14,7 +13,6 @@
         <artifactId>deeplearning4j-examples-parent</artifactId>
         <version>0.7-SNAPSHOT</version>
     </parent>
-
 
     <repositories>
         <repository>
@@ -59,7 +57,25 @@
                 <artifactId>nd4j-cuda-8.0-platform</artifactId>
                 <version>${nd4j.version}</version>
             </dependency>
+            <dependency>
+                <groupId>edu.stanford.nlp</groupId>
+                <artifactId>stanford-corenlp</artifactId>
+                <version>3.6.0</version>
+            </dependency>
+            <dependency>
+                <groupId>edu.stanford.nlp</groupId>
+                <artifactId>stanford-corenlp</artifactId>
+                <version>3.6.0</version>
+                <classifier>models</classifier>
+            </dependency>
+            <dependency>
+                <groupId>edu.stanford.nlp</groupId>
+                <artifactId>stanford-corenlp</artifactId>
+                <version>3.6.0</version>
+                <classifier>models-chinese</classifier>
+            </dependency>
         </dependencies>
+
     </dependencyManagement>
 
     <dependencies>
@@ -82,6 +98,15 @@
             <version>${dl4j.version}</version>
         </dependency>
 
+        <!-- deeplearning4j-ui is used for HistogramIterationListener + visualization: see http://deeplearning4j.org/visualization -->
+        <dependency>
+            <groupId>org.deeplearning4j</groupId>
+            <artifactId>deeplearning4j-ui_2.10</artifactId>
+            <version>${dl4j.version}</version>
+        </dependency>
+
+
+
         <!-- Used in the feedforward/classification/MLP* and feedforward/regression/RegressionMathFunctions example -->
         <dependency>
             <groupId>jfree</groupId>
@@ -94,19 +119,25 @@
             <version>${jcommon.version}</version>
         </dependency>
 
-        <!-- Used in the sentence splitter and tokenization -->
         <dependency>
-            <groupId>org.deeplearning4j</groupId>
-            <artifactId>deeplearning4j-nlp</artifactId>
-            <version>${dl4j.version}</version>
+            <groupId>edu.stanford.nlp</groupId>
+            <artifactId>stanford-corenlp</artifactId>
+            <version>3.6.0</version>
         </dependency>
 
         <dependency>
-            <groupId>org.nd4j</groupId>
-            <artifactId>nd4j-native</artifactId>
-            <version>${nd4j.version}</version>
+            <groupId>edu.stanford.nlp</groupId>
+            <artifactId>stanford-corenlp</artifactId>
+            <version>3.6.0</version>
+            <classifier>models</classifier>
         </dependency>
 
+        <dependency>
+            <groupId>edu.stanford.nlp</groupId>
+            <artifactId>stanford-corenlp</artifactId>
+            <version>3.6.0</version>
+            <classifier>models-chinese</classifier>
+        </dependency>
 
     </dependencies>
 
@@ -180,7 +211,4 @@
     </build>
 
 
-
-
 </project>
-
