@@ -38,7 +38,7 @@ public class STFNLP {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		props.put("annotators", "segment, ssplit,pos");
+		props.put("annotators", "segment,ssplit");
 		//alter default parameters
 		/*
 		props.put("annotators", "tokenize, ssplit, pos");
