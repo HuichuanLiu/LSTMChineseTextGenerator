@@ -17,7 +17,7 @@ public class STFTokenizerFactory implements TokenizerFactory {
         //STFNLPTokenizer stfnlpTokenizer = null;
         try {
             //stfnlpTokenizer = new STFNLPTokenizer(toTokenize);
-            System.out.println("To tokenize: "+toTokenize);
+            //System.out.println("To tokenize: "+toTokenize);
             return new STFNLPTokenizer(toTokenize);
         } catch (IOException e) {
             e.printStackTrace();

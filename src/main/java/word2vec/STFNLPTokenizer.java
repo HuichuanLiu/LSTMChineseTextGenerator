@@ -48,6 +48,7 @@ public class STFNLPTokenizer implements Tokenizer{
     }
 
     public void setTokenPreProcessor(TokenPreProcess tokenPreProcessor) {
+        this.tokenPreProcess=tokenPreProcessor;
     }
 
 }

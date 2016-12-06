@@ -12,15 +12,15 @@ import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
 
-
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 public class STFNLP {
 	private Properties props;
 	private StanfordCoreNLP pipeline;
-	private List<CoreLabel> tokens;	
+	private List<CoreLabel> tokens = new ArrayList<CoreLabel>();
 	
 	// specify parameters and build the pipeline
 	public STFNLP() throws IOException {
@@ -38,7 +38,7 @@ public class STFNLP {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		props.put("annotators", "segment,ssplit");
+		props.put("annotators", "segment,ssplit,pos");
 		//alter default parameters
 		/*
 		props.put("annotators", "tokenize, ssplit, pos");
@@ -60,12 +60,22 @@ public class STFNLP {
 	}
 	
 	public List<CoreLabel> posTag(String s){
-		Annotation annotation = new Annotation(s);
-		pipeline.annotate(annotation);
-		List<CoreMap> sentences = annotation.get(CoreAnnotations.SentencesAnnotation.class);  
-		//id = 0 because input is limited in one input line
-		CoreMap taggedS = sentences.get(0);
-		tokens = taggedS.get(CoreAnnotations.TokensAnnotation.class);
+		if(!s.isEmpty()) {
+			Annotation annotation = new Annotation(s);
+			pipeline.annotate(annotation);
+			List<CoreMap> sentences = annotation.get(CoreAnnotations.SentencesAnnotation.class);
+			//id = 0 because input is limited in one input line
+			CoreMap taggedS = sentences.get(0);
+			tokens = taggedS.get(CoreAnnotations.TokensAnnotation.class);
+		}
+		else{
+			Annotation annotation = new Annotation(".");
+			pipeline.annotate(annotation);
+			List<CoreMap> sentences = annotation.get(CoreAnnotations.SentencesAnnotation.class);
+			//id = 0 because input is limited in one input line
+			CoreMap taggedS = sentences.get(0);
+			tokens = taggedS.get(CoreAnnotations.TokensAnnotation.class);
+		}
 		return tokens;
 	}
 	// get Part-of-Speech
